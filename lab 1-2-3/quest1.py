@@ -1,0 +1,86 @@
+import pandas as pd 
+import numpy as np 
+import matplotlib.pyplot as plt 
+
+# Q1
+# a)
+# Import csv file and make a quick adjust
+dt = pd.read_csv('events.csv',sep=',',header=0,usecols=[2,3],dtype={2:str, 3:np.int32})
+dt.columns = ['Type','ItemId']
+dt = dt[dt.Type == 'view']
+dt= dt.groupby('ItemId').count().reset_index()
+dt.columns = ['ItemId','View']
+# Split in to 100 samples
+for i in range (100):
+    dt.sample(2000).to_csv('lab 1-2-3/'+'sample.'+str(i)+'.csv',sep = ',',index = False)
+
+# b)
+# Import 10 samples 
+dt1 = pd.read_csv('lab 1-2-3/sample.1.csv')
+dt2 = pd.read_csv('lab 1-2-3/sample.2.csv')
+dt3 = pd.read_csv('lab 1-2-3/sample.3.csv')
+dt4 = pd.read_csv('lab 1-2-3/sample.4.csv')
+dt5 = pd.read_csv('lab 1-2-3/sample.5.csv')
+dt6 = pd.read_csv('lab 1-2-3/sample.6.csv')
+dt7 = pd.read_csv('lab 1-2-3/sample.7.csv')
+dt8 = pd.read_csv('lab 1-2-3/sample.8.csv')
+dt9 = pd.read_csv('lab 1-2-3/sample.9.csv')
+dt10 = pd.read_csv('lab 1-2-3/sample.10.csv')
+# Draw 10 bar charts based on number of Item ID and View
+plt.figure(figsize=(8,6))
+plt.bar(dt1['ItemId'],dt1['View'],color = 'red',width=1000,align='center',alpha= 0.5)
+plt.title('Bar chart sample 1',fontsize = 18)
+plt.grid(False)
+plt.show()
+plt.figure(figsize=(8,6))
+plt.bar(dt2['ItemId'],dt2['View'],color = 'green',width=1000,align='center',alpha= 0.5)
+plt.title('Bar chart sample 2',fontsize = 18)
+plt.grid(False)
+plt.show()
+plt.figure(figsize=(8,6))
+plt.bar(dt3['ItemId'],dt3['View'],color = 'blue',width=1000,align='center',alpha= 0.5)
+plt.title('Bar chart sample 3',fontsize = 18)
+plt.grid(False)
+plt.show()
+plt.figure(figsize=(8,6))
+plt.bar(dt4['ItemId'],dt4['View'],color = 'yellow',width=1000,align='center',alpha= 0.5)
+plt.title('Bar chart sample 4',fontsize = 18)
+plt.grid(False)
+plt.show()
+plt.figure(figsize=(8,6))
+plt.bar(dt5['ItemId'],dt5['View'],color = 'black',width=1000,align='center',alpha= 0.5)
+plt.title('Bar chart sample 5',fontsize = 18)
+plt.grid(False)
+plt.show()
+plt.figure(figsize=(8,6))
+plt.bar(dt6['ItemId'],dt6['View'],color = 'c',width=1000,align='center',alpha= 0.5)
+plt.title('Bar chart sample 6',fontsize = 18)
+plt.grid(False)
+plt.show()
+plt.figure(figsize=(8,6))
+plt.bar(dt7['ItemId'],dt7['View'],color = 'pink',width=1000,align='center',alpha= 0.5)
+plt.title('Bar chart sample 7',fontsize = 18)
+plt.grid(False)
+plt.show()
+plt.figure(figsize=(8,6))
+plt.bar(dt8['ItemId'],dt8['View'],color = 'red',width=1000,align='center',alpha= 0.5)
+plt.title('Bar chart sample 8',fontsize = 18)
+plt.grid(False)
+plt.show()
+plt.figure(figsize=(8,6))
+plt.bar(dt9['ItemId'],dt9['View'],color = 'green',width=1000,align='center',alpha= 0.5)
+plt.title('Bar chart sample 9',fontsize = 18)
+plt.grid(False)
+plt.show()
+plt.figure(figsize=(8,6))
+plt.bar(dt10['ItemId'],dt10['View'],color = 'blue',width=1000,align='center',alpha= 0.5)
+plt.title('Bar chart sample 10',fontsize = 18)
+plt.grid(False)
+plt.show()
+
+# c)
+# Draw boxplot of 10 samples
+plt.boxplot([dt1['View'],dt2['View'],dt3['View'],dt4['View'],dt5['View'],dt6['View'],dt7['View'],dt8['View'],dt9['View'],dt10['View']],notch=False,vert=False)
+plt.title('Boxplot for 10 samples',fontsize=18)
+plt.grid(False)
+plt.show()
